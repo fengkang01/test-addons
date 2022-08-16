@@ -1,6 +1,6 @@
-name: odoo
+name: odoo-db
 version: v0.1.0
-description: digital-odoo-test
+description: odoo-test
 icon: https://odoocdn.com/openerp_website/static/src/img/2016/logos/odoo_logo.svg
 url:
 
