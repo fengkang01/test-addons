@@ -4,3 +4,49 @@ metadata:
   name: odoo
   namespace: vela-system
 spec:
+  components:
+    - name: postgresql
+      type: "helm"
+      properties:
+        repoType: "helm"
+        url: "https://charts.bitnami.com/bitnami"
+        chart: "postgresql"
+        version: "11.7.1"
+        values:
+          auth:
+            postgresPassword: "dc123456"
+            username: "odoo"
+            password: "dc123456"
+          primary:
+            service:
+              type: "ClusterIP"
+    - name: odoo-demo
+      type: webservice2
+      properties:
+        cpu: "0.5"
+        exposeType: NodePort
+        image: harbor.dev.wh.digitalchina.com/kubevela/odoo14:V1.4
+        memory: 1024Mi
+        ports:
+          - expose: true
+            port: 8069
+            protocol: TCP
+            nodePort: 31157
+      traits:
+        - properties:
+            replicas: 1
+          type: scaler
+  policies:
+      - name: odoo-demo-targe
+        properties:
+          clusters:
+            - local
+          namespace: vela-system
+        type: topology
+  workflow:
+      steps:
+        - name: odoo-demo-targe
+          properties:
+            policies:
+              - odoo-demo-targe
+          type: deploy
