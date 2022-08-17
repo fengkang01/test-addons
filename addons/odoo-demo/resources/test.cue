@@ -2,7 +2,7 @@ import (
         "strconv"
 )
 
-webservice: {
+webservice2: {
         type: "component"
         annotations: {}
         attributes: {
@@ -200,6 +200,9 @@ template: {
                                                                         if v.name == _|_ {
                                                                                 name: "port-" + strconv.FormatInt(v.port, 10)
                                                                         }
+                                                                        if v.nodePort != _|_ {
+                                                                        				nodePort: v.nodePort
+                                                                        }
                                                                 }}]
                                                 }
 
@@ -364,6 +367,8 @@ template: {
                         protocol: *"TCP" | "UDP" | "SCTP"
                         // +usage=Specify if the port should be exposed
                         expose: *false | bool
+                        //
+                        nodePort?: int
                 }]
 
                 // +ignore
