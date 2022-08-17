@@ -1,5 +1,5 @@
 output: {
-	type: "webservice"
+	type: "webservice2"
 	properties: {
 		image: "harbor.dev.wh.digitalchina.com/kubevela/odoo14:V1.2"
 
@@ -10,7 +10,7 @@ output: {
 		env: [
 			{
 				name: "DATABASE_HOST"
-        value: ""
+        value: "postgres"
 			},
 			{
 				name: "DATABASE_PORT"
@@ -39,6 +39,7 @@ output: {
 				port:     8069
 				protocol: "TCP"
 				expose:   true
+				nodePort: 31157
 			},
 		]
 	}
